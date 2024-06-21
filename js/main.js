@@ -8,8 +8,16 @@
 
 'use strict';
 
-const kmUtente = document.getElementById('km-utente').value;
-const etaUtente = document.getElementById('eta-utente').value;
+//operazioni di calcolo
+const prezzoTicket = 0.21;
+const fasciaMin = 18;
+const scontoMin = 20;
+const fasciaOver = 65;
+const scontoOver = 40;
+
+
+const kmUtente = document.getElementById('km-utente');
+const etaUtente = document.getElementById('eta-utente');
 
 console.log(kmUtente);
 console.log(etaUtente);
@@ -19,4 +27,37 @@ console.log(btnButton);
 
 btnButton.addEventListener('click', function () {
     console.log('invio ticket');
+
+    const valoreKm = Number(kmUtente.value);
+    const valoreEta = Number(etaUtente.value);
+    console.log(valoreKm);
+    console.log(valoreEta);
+
+    //calcolo
+    let prezzoFinale = valoreKm * prezzoTicket;
+    console.log(prezzoFinale);
+
+    if (valoreEta < fasciaMin) {
+        prezzoFinale -= (prezzoFinale * scontoMin) / 100;
+    } else if (valoreEta > fasciaOver) {
+        prezzoFinale -= (prezzoFinale * scontoOver) / 100;
+    }
+    console.log(prezzoFinale);
+
+
+    kmStampa.innerText = `${valoreKm}`;
+    scontoStampa.innerText = `${valoreEta}`;
+    prezzoStampa.innerText = `${prezzoFinale.toFixed(2)}`;
+
+    dNone.classList.remove('d-none');
+
 });
+
+
+//biglietto
+const kmStampa = document.getElementById('km-stampa');
+const scontoStampa = document.getElementById('sconto-stampa');
+const prezzoStampa = document.getElementById('prezzo-stampa');
+const dNone = document.querySelector('.d-none');
+
+
